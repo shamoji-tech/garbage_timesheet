@@ -42,16 +42,3 @@ resource "google_pubsub_topic" "slack_notify" {
   project = var.project
 }
 
-resource "google_cloud_scheduler_job" "slack-notify-scheduler-burnable" {
-
-    name    = "slack-notify-burnable"
-    project = var.project
-    description = "燃えるゴミの日通知"
-    schedule = "00 21 * * 0,3"
-    time_zone = "Asia/Tokyo"
-
-    pubsub_target {
-        topic_name = google_pubsub_topic.slack_notify.id
-        data       = base64encode("明日は燃えるゴミの日です")
-    }
-}
