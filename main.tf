@@ -52,6 +52,6 @@ resource "google_cloud_scheduler_job" "slack-notify-scheduler-burnable" {
 
     pubsub_target {
         topic_name = google_pubsub_topic.slack_notify.id
-        data       = base64encode("test")
+        data       = base64encode("明日は燃えるゴミの日です")
     }
 }
