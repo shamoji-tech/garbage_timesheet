@@ -12,17 +12,17 @@ def send_message(context, info):
     
     print(context, info) #for logging
 
-def is2nd4thSaturdayOnContext(context, info):
+def is2nd4thFridayOnContext(context, info):
     
-    if is2nd4thSaturday(datetime.date.today()):
+    if is2nd4thFriday(datetime.date.today()):
         send_message(context, info)
     
-    print(datetime.date.today(),is2nd4thSaturday(datetime.date.today()))
+    print(datetime.date.today(),is2nd4thFriday(datetime.date.today()))
 
 
-def is2nd4thSaturday(today: datetime.date) -> bool:
+def is2nd4thFriday(today: datetime.date) -> bool:
     
-    if today.weekday()==5 and numOfWeek(today) in [2,4]:
+    if today.weekday()==4 and numOfWeek(today) in [2,4]:
         return True
     else:
         return False 
