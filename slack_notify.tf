@@ -4,7 +4,8 @@ resource "google_cloudfunctions_function" "slack_function"{
     description = "Slackにメッセージを通知"
     runtime = "python37"
     project = var.project
-    entry_point = "main"
+    entry_point = "send_message"
+    region = var.region
 
     source_archive_bucket = google_storage_bucket.garbage-system-bucket.name
     source_archive_object = google_storage_bucket_object.python_soucecode.name
@@ -32,6 +33,7 @@ resource "google_cloudfunctions_function" "fridayday_slack_function"{
     runtime = "python37"
     project = var.project
     entry_point = "is2nd4thFridayOnContext"
+    region = var.region
 
     source_archive_bucket = google_storage_bucket.garbage-system-bucket.name
     source_archive_object = google_storage_bucket_object.python_soucecode.name
@@ -48,7 +50,7 @@ resource "google_cloudfunctions_function" "fridayday_slack_function"{
 }
 
 resource "google_pubsub_topic" "friday_slack_notify" {
-  name    = "slack-notify"
+  name    = "slack-notify-friday"
   project = var.project
 }
 
