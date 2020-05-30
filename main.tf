@@ -6,7 +6,7 @@ resource "google_storage_bucket" "garbage-system-bucket" {
 
 resource "google_storage_bucket_object" "python_soucecode"{
     name = "functions.zip"
-    source = archive_file.function_zip.output_path
+    source = "./functions.zip"
     bucket = google_storage_bucket.garbage-system-bucket.name
 }
 
@@ -34,7 +34,7 @@ resource "google_cloudfunctions_function" "slack_function"{
         event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
         resource   = google_pubsub_topic.slack_notify.name
     }
-
+    service_account_email = "batchkickingaccount@general-259115.iam.gserviceaccount.com"
 }
 
 resource "google_pubsub_topic" "slack_notify" {

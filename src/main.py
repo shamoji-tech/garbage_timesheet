@@ -1,6 +1,9 @@
 import slackweb
 import os
-def main(context):
+import base64
+def main(context,context2):
+    print(context,context2)
     slack=slackweb.Slack(url=os.environ["SLACK_WEBHOOK_URL"])
-    slack.notify(text="test")
+    slack.notify(text=base64.b64decode(context["data"]))
+
 
