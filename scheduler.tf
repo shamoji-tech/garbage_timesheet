@@ -50,6 +50,6 @@ resource "google_cloud_scheduler_job" "slack-notify-scheduler-noburnable" {
 
     pubsub_target {
         topic_name = google_pubsub_topic.friday_slack_notify.id
-        data       = base64encode("金曜日の9時になりました。第2第4土曜日は燃えないゴミの日です。該当する曜日の日であれば、空き瓶を門のそとに出しましょう。")
+        data       = base64encode("金曜日の9時になりました。第2第4土曜日は燃えないゴミの日です。出すものがあれば、燃えないゴミを門のそとに出しましょう。")
     }
 }
