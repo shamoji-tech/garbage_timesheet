@@ -1,13 +1,31 @@
-import slackweb
-import os
-import base64
-def main(context,context2):
-    print(context,"1_type:",type(context),context["data"])
-    slack=slackweb.Slack(url=os.environ["SLACK_WEBHOOK_URL"])
-    bs64code=context["data"]
-    send_text=base64.b64decode(bs64code).decode()
-    slack.notify(text=send_text)
-    print(send_text)
+import calendar
+import datetime
+from dao.dao import SlackMessager,ExtractMessageFromPubSubContext,OSEnvironmentState
+
+def send_message(context, info):
     
+    webhook=OSEnvironmentState.getSlackWebhook()
+    slackMessager=SlackMessager(webhook=webhook)
+    message = ExtractMessageFromPubSubContext.messageDecode(context)
+    
+    slackMessager.send(message)
+    
+    print(context, info) #for logging
+
+def is2nd4thFridayOnContext(context, info):
+    
+    if is2nd4thFriday(datetime.date.today()):
+        send_message(context, info)
+    
+    print(datetime.date.today(),is2nd4thFriday(datetime.date.today()))
 
 
+def is2nd4thFriday(today: datetime.date) -> bool:
+    
+    if today.weekday()==4 and numOfWeek(today) in [2,4]:
+        return True
+    else:
+        return False 
+
+def numOfWeek(today: datetime.date) -> int:
+    return (today.day-1)//7+1

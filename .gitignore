@@ -1,3 +1,6 @@
 .terraform
 secret.tf
 functions.zip
+__pycache__
+.vscode
+*.code-workspace
